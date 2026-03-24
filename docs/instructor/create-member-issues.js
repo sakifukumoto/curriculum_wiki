@@ -3,7 +3,10 @@
  * 新メンバーの課題issueを一括作成し、親issueの子として紐付けるスクリプト
  *
  * 使い方:
- *   node docs/instructor/create-member-issues.js [メンバー名] [親issueの番号]
+ *   node docs/instructor/create-member-issues.js [GitHubアカウント名] [親issueの番号]
+ *
+ * ※ メンバー名はGitHubのアカウント名（英数字）を指定してください。日本語名は不可。
+ * ※ 指定したアカウント名が全ての子issueにアサインされます。親issueのアサイン者は自動連動しません。
  *
  * 例:
  *   node docs/instructor/create-member-issues.js yamada-taro 34
@@ -158,7 +161,7 @@ async function main() {
   const createdIssues = [];
   for (let i = 0; i < ISSUES.length; i++) {
     const issue = ISSUES[i];
-    const title = '[' + memberName + '] ' + issue.title;
+    const title = issue.title;
     const body = '**担当者：** ' + memberName + '\n\n' + issue.body;
 
     process.stdout.write('  作成中 [' + (i + 1) + '/' + ISSUES.length + '] ' + issue.title + '... ');
